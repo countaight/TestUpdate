@@ -5,7 +5,7 @@ import TappableRow from './TappableRow';
 
 class Locator extends Component {
 	_fetchCoords() {
-		this.props.fetchCoords();
+		this.props.fetchCoords(this.props.user.id);
 	}
 
 	render() {
@@ -13,7 +13,7 @@ class Locator extends Component {
 		return (
 			<View style={styles.container}>
 				<Text>Send Location to Dispatch</Text>
-				<Text>
+				<Text style={{fontFamily: 'ReemKufi-Regular'}}>
 					<Text>{"\n"}{user.email}{"\n"}</Text>
 					<Text>{"\n"}Map Coordinates {"\n"}Longitude: {user.initialLong}{"\n"}</Text>
 					<Text>Latitude: {user.initialLat}</Text>
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
 	},
 	buttonText: {
 		fontSize: 25,
+		fontFamily: "ReemKufi-Regular",
 		color: "white",
 	},
 })

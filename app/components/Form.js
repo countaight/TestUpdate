@@ -1,5 +1,7 @@
+
 import React, { Component } from 'react';
 import {
+	Animated,
 	Text,
 	TextInput,
 	TouchableHighlight,
@@ -7,8 +9,50 @@ import {
 } from 'react-native';
 
 class Form extends Component {
-	focusNextField (nextField) {
+	constructor (props) {
+		super(props);
+		this.state = {
+			email: new Animated.Value(0),
+			password: new Animated.Value(0)
+		}
+	}
+
+	_selectField (field) {
+		Animated.timing(
+			this.state[field],
+			{toValue: 1}
+		).start();
+	}
+
+	_changeField (field) {
+		if (this.props.formFields[field].length === 0) {
+			Animated.timing(
+			this.state[field],
+			{toValue: 0}
+		).start();
+		}
+	}
+
+	_focusNextField (nextField) {
 		this.refs[nextField].focus();
+	}
+
+	_getStyle (field) {
+		return [
+			styles.placeholder,
+			{
+				fontSize: this.state[field].interpolate({
+					inputRange: [0, 1],
+					outputRange: [16, 12]
+				}),
+				transform: [{
+					translateY: this.state[field].interpolate({
+						inputRange: [0, 1],
+						outputRange: [30, 0]
+					}),
+				}],
+			}
+		]
 	}
 
 	_onChange (field, text) {
@@ -26,27 +70,32 @@ class Form extends Component {
 					<Text style={styles.text}>
 						Login
 					</Text>
-					<View style={{backgroundColor: '#EEE'}}>
-						<Text style={{padding: 5, backgroundColor: "#DDD", height: 35, fontFamily: 'Montserrat-Regular',textAlignVertical: 'bottom'}}>Email</Text>
+					<View style={{height: 60}}>
+						<Animated.Text style={this._getStyle('email')}>Email</Animated.Text>
 						<TextInput
 							keyboardType={"email-address"}
-							onChangeText={this._onChange.bind(this, "email")} 
-							onSubmitEditing={() => this.focusNextField('2')}
-							placeholder={"Email"}
+							onBlur={this._changeField.bind(this, "email")}
+							onChangeText={this._onChange.bind(this, "email")}
+							onFocus={this._selectField.bind(this, "email")}
+							onSubmitEditing={() => this._focusNextField('2')}
 							ref={'1'}
 							returnKeyType={'next'} 
 							style={styles.input}
 						/>
 					</View>
-					<TextInput 
-						onChangeText={this._onChange.bind(this, "password")}
-						onSubmitEditing={this._submit.bind(this)} 
-						placeholder={"Password"} 
-						ref={'2'} 
-						returnKeyType={'done'} 
-						secureTextEntry={true} 
-						style={styles.input} 
-					/>
+					<View style={{height: 60}}>
+						<Animated.Text style={this._getStyle('password')}>Password</Animated.Text>
+						<TextInput
+							onBlur={this._changeField.bind(this, "password")}
+							onChangeText={this._onChange.bind(this, "password")}
+							onFocus={this._selectField.bind(this, "password")}
+							onSubmitEditing={this._submit.bind(this)} 
+							ref={'2'} 
+							returnKeyType={'done'} 
+							secureTextEntry={true} 
+							style={styles.input} 
+						/>
+					</View>
 					<TouchableHighlight
 						disabled={this.props.formFields.email.length === 0}
 						onPress={this._submit.bind(this)}
@@ -59,8 +108,6 @@ class Form extends Component {
 			</View>
 		)
 	}
-
-
 }
 
 const styles = {
@@ -82,6 +129,7 @@ const styles = {
 		justifyContent: 'center',
 	},
 	formContainer: {
+		left: 200,
 		backgroundColor: 'white',
 		padding: 10,
 		alignItems: 'center',
@@ -89,10 +137,14 @@ const styles = {
 	input: {
 		fontFamily: 'Montserrat-Regular',
 		fontSize: 16,
-		height: 40,
 		width: 250,
+		height: 40,
 		borderColor: '#669966',
 		borderWidth: 2,
+	},
+	placeholder: {
+		paddingLeft: 5,
+		fontFamily: 'Montserrat-Regular',
 	},
 	text: {
 		fontSize: 30,

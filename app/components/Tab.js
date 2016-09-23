@@ -38,10 +38,11 @@ const styles = StyleSheet.create({
 	},
 	tabText: {
 		color: '#222',
-		fontWeight: '500',
+		fontFamily: 'Montserrat-Regular',
 	},
 	tabSelected: {
 		color: '#669966',
+		fontFamily: 'Montserrat-Bold'
 	},
 	tabStyleSelected: {
 		backgroundColor: '#E9E9EF',

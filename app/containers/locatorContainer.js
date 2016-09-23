@@ -12,6 +12,6 @@ function mapStateToProps(state) {
 export default connect(
 	mapStateToProps,
 	{
-		fetchCoords: () => fetchCoords(),
+		fetchCoords: (userId) => fetchCoords(userId),
 	}
 )(Locator)

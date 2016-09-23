@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
 	ActivityIndicator,
 	Animated,
+	Image,
 	StyleSheet,
 	Text,
 	TextInput,
@@ -51,10 +52,12 @@ class Home extends Component {
 		} else {
 			var view = <Form formFields={{email: this.props.user.email, password: this.props.user.password}} onChangeTxt={this.props.onChangeTxt} submitForm={this.props.submitForm} />
 		};
-
+		
 		return (
 			<Animated.View style={this._getStyle()}>
-				{ view }
+				<Image source={require('../imgs/backdropCity.jpg')} style={styles.image}>
+					{ view }
+				</Image>
 			</Animated.View>
 		)
 	}
@@ -71,6 +74,10 @@ const styles = StyleSheet.create({
 		paddingTop: 0,
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	image: {
+		height: 616,
+		left: -200,
 	},
 	welcome: {
 		fontSize: 16,
