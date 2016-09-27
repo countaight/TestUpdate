@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Locator from '../components/Locator';
-import { fetchCoords } from '../actions/userActions';
+import { fetchCoords, fetchTest } from '../actions/userActions';
 
 function mapStateToProps(state) {
 	return {
@@ -13,5 +13,6 @@ export default connect(
 	mapStateToProps,
 	{
 		fetchCoords: (userId) => fetchCoords(userId),
+		fetchTest: (userId, coords) => fetchTest(userId, coords),
 	}
 )(Locator)

@@ -4,6 +4,23 @@ import { StatusBar, StyleSheet, Text, TextInput, ToastAndroid, TouchableHighligh
 import TappableRow from './TappableRow';
 
 class Locator extends Component {
+	watchID: ?number = null;
+
+	componentDidMount() {
+		this.watchID = navigator.geolocation.watchPosition(
+			(position) => {
+				var initialLong = JSON.stringify(position.coords.longitude);
+				var initialLat = JSON.stringify(position.coords.latitude);
+				this.props.fetchTest(this.props.user.id, { initialLong, initialLat });
+			},
+			(error) => alert(error)
+		);
+	}
+
+	componentWillUnmount() {
+		navigator.geolocation.clearWatch(this.watchID);
+	}
+
 	_fetchCoords() {
 		this.props.fetchCoords(this.props.user.id);
 	}
