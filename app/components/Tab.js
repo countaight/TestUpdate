@@ -9,12 +9,14 @@ export default class Tab extends Component {
 
 	render () {
 		const style = [styles.tabText];
+		const tabStyle = [styles.tab];
 		if (this.props.selected) {
-			style.push(styles.tabSelected)
+			style.push(styles.tabSelected);
+			tabStyle.push(styles.tabStyleSelected);
 		}
 		
 		return (
-			<TouchableOpacity style={styles.tab} onPress={this._onPress}>
+			<TouchableOpacity style={tabStyle} onPress={this._onPress}>
 				<Text style={style}>
 					{this.props.route.key}
 				</Text>
@@ -36,9 +38,13 @@ const styles = StyleSheet.create({
 	},
 	tabText: {
 		color: '#222',
-		fontWeight: '500',
+		fontFamily: 'Montserrat-Regular',
 	},
 	tabSelected: {
-		color: 'blue',
+		color: '#669966',
+		fontFamily: 'Montserrat-Bold'
+	},
+	tabStyleSelected: {
+		backgroundColor: '#E9E9EF',
 	}
 });

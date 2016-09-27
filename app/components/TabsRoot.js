@@ -2,12 +2,10 @@
 import React, { Component } from 'react';
 import { BackAndroid, NavigationExperimental, StyleSheet, Text, ToolbarAndroid, View } from 'react-native';
 
-import Home from './Home';
-import Recipes from './Recipes';
-import Samples from './Samples';
+import Home from '../containers/homeContainer';
+import Locator from '../containers/locatorContainer';
 import TabsModule from './Tabs';
 import TappableRow from './TappableRow';
-import TestComp from './TestComp';
 
 const {
 	CardStack: NavigationCardStack
@@ -50,20 +48,24 @@ export default class Tabs extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const { tabs } = this.props.tabs;
 		const tabKey = tabs.routes[tabs.index].key;
 		const scenes = this.props.tabs[tabKey];
+		if (this.props.user.fetched === true) {
+			var view = <TabsModule changeTab={this.props.changeTab} navigationState={tabs}/>
+		}
+
 		return (
-			<View style={styles.navigate}>
+			<View user={this.props.user.user} style={styles.navigate}>
 				<NavigationCardStack
 					key={'stack_' + this.tabKey }
 					onNavigate={this._handleNavigate}
 					navigationState={scenes}
 					renderScene={this._renderScene}
 					style={styles.navigatorCardStack}
+					user={this.props.user.user}
 				/>
-				<TabsModule changeTab={this.props.changeTab} navigationState={tabs}/>
+				{ view }
 			</View>
 		);
 	}
@@ -81,34 +83,19 @@ export default class Tabs extends Component {
 
 		if (route.key === 'Locator') {
 			return (
-				<TestComp
+				<Locator
 					{...sceneProps}
-					_goBack={this._handleBackAction}
+					_handleNavigate={this._handleNavigate.bind(this)}
 				/>
 			)
-		}
-
-		if (route.key === 'Samples Home') {
-			return (
-				<Samples
-				_handleNavigate={this._handleNavigate.bind(this)}
-				/>
-			)
-		}
-
-		if (route.key === 'Recipes Home') {
-			return (
-				<Recipes _handleNavigate={this._handleNavigate.bind(this)} />
-			)
-		} else {
-			return <Text>{JSON.stringify(route)}</Text>
 		}
 	}
 }
 
 const styles = StyleSheet.create({
   navigate: {
-  	flex: 1
+  	flex: 1,
+  	backgroundColor: "#E9E9EF",
   },
   navigatorCardStack: {
   	flex: 20

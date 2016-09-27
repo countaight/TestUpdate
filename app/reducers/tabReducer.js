@@ -21,8 +21,7 @@ const recipeIcon = {
 
 const routes = [
   { key: 'home', title: 'Main' },
-  { key: 'recipes', title: 'Recipes' },
-  { key: 'samples', title: 'Samples' }
+  { key: 'locator', title: 'Locator' },
 ]
 
 const initialState = {
@@ -34,13 +33,9 @@ const initialState = {
   	index: 0,
   	routes: [{ key: 'Home' }],
   },
-  recipes: {
+  locator: {
   	index: 0,
-  	routes: [{ key: 'Recipes Home' }],
-  },
-  samples: {
-  	index: 0,
-  	routes: [{ key: 'Samples Home' }],
+  	routes: [{ key: 'Locator' }],
   },
 }
 
@@ -52,7 +47,6 @@ function tabsNav (state = initialState, action) {
   		const tabKey = tabs.routes[tabs.index].key;
   		const scenes = state[tabKey];
   		const nextScenes = NavigationStateUtils.push(scenes, route);
-  		console.log(nextScenes);
   		if (scenes !== nextScenes) {
   			return {
   				...state,

@@ -6,16 +6,10 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  NavigationExperimental
+  AppRegistry
 } from 'react-native';
 import { Provider } from 'react-redux';
 
-import NavigationRootContainer from './app/containers/navRootContainer';
 import TabsRootContainer from './app/containers/tabsRootContainer';
 import store from './app/store';
 

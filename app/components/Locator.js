@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
 import { StatusBar, StyleSheet, Text, TextInput, ToastAndroid, TouchableHighlight, View } from 'react-native';
-import { connect } from 'react-redux';
 
-import { fetchUser } from '../actions/userActions';
 import TappableRow from './TappableRow';
 
-class TestComp extends Component {
-	constructor(props) {
-		super(props);
-		this._goBack = this._goBack.bind(this);
+class Locator extends Component {
+	watchID: ?number = null;
+
+	componentDidMount() {
+		this.watchID = navigator.geolocation.watchPosition(
+			(position) => {
+				var initialLong = JSON.stringify(position.coords.longitude);
+				var initialLat = JSON.stringify(position.coords.latitude);
+				this.props.fetchTest(this.props.user.id, { initialLong, initialLat });
+			},
+			(error) => alert(error)
+		);
 	}
 
-	fetchCoords() {
-		this.props.dispatch(fetchUser());
+	componentWillUnmount() {
+		navigator.geolocation.clearWatch(this.watchID);
+	}
+
+	_fetchCoords() {
+		this.props.fetchCoords(this.props.user.id);
 	}
 
 	render() {
@@ -20,18 +30,16 @@ class TestComp extends Component {
 		return (
 			<View style={styles.container}>
 				<Text>Send Location to Dispatch</Text>
-			  <TappableRow
-			  	text="Go Back"
-			  	onPress={this._goBack}
-			  />
-				<Text>
+				<Text style={{fontFamily: 'ReemKufi-Regular'}}>
+					<Text>{"\n"}{user.email}{"\n"}</Text>
 					<Text>{"\n"}Map Coordinates {"\n"}Longitude: {user.initialLong}{"\n"}</Text>
 					<Text>Latitude: {user.initialLat}</Text>
 					{"\n"}
 				</Text>
 				<TappableRow
 					text="Share Location"
-					onPress={this.fetchCoords.bind(this)}
+					onPress={this._fetchCoords.bind(this)}
+					styles={styles}
 				/>
 			</View>
 		)
@@ -50,24 +58,20 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F5F5F5',
+		backgroundColor: '#E9E9EF',
 	},
 	button: {
 		height: 90,
 		width: 210,
-		backgroundColor: "#669966",
+		backgroundColor: '#669966',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	buttonText: {
 		fontSize: 25,
+		fontFamily: "ReemKufi-Regular",
 		color: "white",
 	},
 })
 
-export default connect((store) => {
-	return {
-		user: store.user.user,
-		userFetched: store.user.fetched,
-	};
-})(TestComp);
+export default Locator;
