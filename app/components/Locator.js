@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { StatusBar, StyleSheet, Text, TextInput, ToastAndroid, TouchableHighlight, View } from 'react-native';
+import { 
+	StatusBar, 
+	StyleSheet, 
+	Text, 
+	TextInput, 
+	ToastAndroid, 
+	TouchableHighlight, 
+	View 
+} from 'react-native';
 
 import TappableRow from './TappableRow';
 

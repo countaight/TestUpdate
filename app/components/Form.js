@@ -114,7 +114,7 @@ const styles = {
 	button: {
 		height: 50,
 		width: 250,
-		backgroundColor: '#669966',
+		backgroundColor: '#006838',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
