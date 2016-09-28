@@ -127,9 +127,9 @@ const styles = {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
+		opacity: 0.8,
 	},
 	formContainer: {
-		left: 200,
 		backgroundColor: 'white',
 		padding: 10,
 		alignItems: 'center',

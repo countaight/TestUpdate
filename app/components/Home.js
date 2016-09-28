@@ -55,7 +55,7 @@ class Home extends Component {
 		
 		return (
 			<Animated.View style={this._getStyle()}>
-				<Image source={require('../imgs/backdropCity.jpg')} style={styles.image}>
+				<Image resizeMode={'contain'} source={require('../imgs/backgroundTruck.jpeg')} style={styles.image}>
 					{ view }
 				</Image>
 			</Animated.View>
@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		height: 616,
-		left: -200,
 	},
 	welcome: {
 		fontSize: 16,
