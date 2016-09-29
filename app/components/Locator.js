@@ -37,15 +37,14 @@ class Locator extends Component {
 		const { user } = this.props;
 		return (
 			<View style={styles.container}>
-				<Text>Send Location to Dispatch</Text>
-				<Text style={{fontFamily: 'ReemKufi-Regular'}}>
+				<Text style={{fontFamily: 'ReemKufi-Regular', width: 210}}>
 					<Text>{"\n"}{user.email}{"\n"}</Text>
 					<Text>{"\n"}Map Coordinates {"\n"}Longitude: {user.initialLong}{"\n"}</Text>
 					<Text>Latitude: {user.initialLat}</Text>
 					{"\n"}
 				</Text>
 				<TappableRow
-					text="Share Location"
+					text="Check In"
 					onPress={this._fetchCoords.bind(this)}
 					styles={styles}
 				/>
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
 	button: {
 		height: 90,
 		width: 210,
-		backgroundColor: '#669966',
+		backgroundColor: '#006838',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

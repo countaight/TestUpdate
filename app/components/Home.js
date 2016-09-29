@@ -48,16 +48,17 @@ class Home extends Component {
 		if (fetched === false && fetching === true) {
 			var view = <ActivityIndicator size="large" animating={true} />
 		} else if (fetched === true && fetching === false) {
-			var view = <Text style={styles.welcome}>Welcome to Noel Transportation App</Text>
+			var view = <Text style={styles.welcome}>Welcome to the Noel Transportation App. Stay on the Locator tab to send location.</Text>
 		} else {
-			var view = <Form formFields={{email: this.props.user.email, password: this.props.user.password}} onChangeTxt={this.props.onChangeTxt} submitForm={this.props.submitForm} />
+			var view = 
+				<Image resizeMode={'contain'} source={require('../imgs/backgroundTruck.jpeg')} style={styles.image}>
+					<Form formFields={{email: this.props.user.email, password: this.props.user.password}} onChangeTxt={this.props.onChangeTxt} submitForm={this.props.submitForm} />
+				</Image>
 		};
 		
 		return (
 			<Animated.View style={this._getStyle()}>
-				<Image resizeMode={'contain'} source={require('../imgs/backgroundTruck.jpeg')} style={styles.image}>
-					{ view }
-				</Image>
+				{ view }
 			</Animated.View>
 		)
 	}
@@ -77,9 +78,12 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		height: 616,
+		justifyContent: 'center',
 	},
 	welcome: {
 		fontSize: 16,
+		width: 300,
+		fontFamily: 'Montserrat-Regular'
 	}
 })
 
