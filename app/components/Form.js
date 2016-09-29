@@ -114,7 +114,7 @@ const styles = {
 	button: {
 		height: 50,
 		width: 250,
-		backgroundColor: '#669966',
+		backgroundColor: '#006838',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -127,9 +127,9 @@ const styles = {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
+		opacity: 0.8,
 	},
 	formContainer: {
-		left: 200,
 		backgroundColor: 'white',
 		padding: 10,
 		alignItems: 'center',
@@ -139,7 +139,7 @@ const styles = {
 		fontSize: 16,
 		width: 250,
 		height: 40,
-		borderColor: '#669966',
+		borderColor: '#006838',
 		borderWidth: 2,
 	},
 	placeholder: {

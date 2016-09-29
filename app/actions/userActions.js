@@ -1,3 +1,5 @@
+import { ToastAndroid } from 'react-native';
+
 import { CHANGE_TEXT, SUBMIT_FORM } from '../constants/ActionTypes';
 
 export function fetchCoords(userId) {
@@ -66,12 +68,14 @@ export function submitForm(fields) {
 				type: 'FETCH_USER_FULFILLED',
 				payload: respJSON.body
 			});
+			ToastAndroid.show('Success!', ToastAndroid.SHORT);
 		})
 		.catch((error) => {
 			dispatch({
 				type: 'FETCH_USER_REJECTED',
 				payload: error
 			});
+			ToastAndroid.show('Email/Password combinations was incorrect. Try again.', ToastAndroid.SHORT)
 		})
 	}
 }

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 		fontFamily: 'Montserrat-Regular',
 	},
 	tabSelected: {
-		color: '#669966',
+		color: '#006838',
 		fontFamily: 'Montserrat-Bold'
 	},
 	tabStyleSelected: {
